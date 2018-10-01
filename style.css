@@ -6,7 +6,7 @@
 
 body {
     height: 100vh;
-    padding-top: 80px;
+    padding-top: 40px;
 }
 
 #calculator{
@@ -36,11 +36,11 @@ body {
     border-radius: 5px;
 }
 
-.component, .display {
+.component, .display, #equal {
     border: 1px solid black;
 }
 
-.component, #display-result, #display-equation {
+.component, #display-result, #display-equation, #equal {
     display: flex;
 }
 
@@ -49,7 +49,7 @@ p {
     align-self: center;
 }
 
-.component {
+.component, #equal {
     background: #dadada;
     box-shadow: 1px 1px 3px rgb(54, 54, 54);
 }

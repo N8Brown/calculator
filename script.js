@@ -1,18 +1,15 @@
-const operators = document.querySelectorAll('.operators');
-const numbers = document.querySelectorAll('.numbers');
+const buttons = document.querySelectorAll('.component');
 const displaySmall = document.getElementById('equation');
 const displayLarge = document.getElementById('result');
 const clear = document.getElementById('clear');
 const equal = document.getElementById('equal');
+const operators = ["+","-","*","/"];
+const numbers = ["0","1","2","3","4","5","6","7","8","9"];
 let equation = [];
 let input = [];
 
-for (x=0; x<operators.length; x++){
-    operators[x].addEventListener('click', getValue);
-}
-
-for (x=0; x<numbers.length; x++){
-    numbers[x].addEventListener('click', getValue);
+for (x=0; x<buttons.length; x++){
+    buttons[x].addEventListener('click', getValue);
 }
 
 equal.addEventListener('click', getResult);
@@ -28,11 +25,21 @@ function checkFont(){
 }
 
 function getValue(){
-    let button = this.querySelector('p').innerText;
-    equation.push(button);
-    input.push(button);
-    displaySmall.innerText = equation.join("");
-    switch (button){
+    let value = this.querySelector('p').innerText;
+
+    if (operators.includes(value) && operators.includes(equation[equation.length-1])){
+        equation.pop();
+        equation.push(value);
+    }
+
+    else {
+        equation.push(value);
+    }
+    
+    input.push(value);
+    displaySmall.innerText = equation.join("");    
+
+    switch (value){
         case "+": displayLarge.innerText = "";
             input = [];
             break;
@@ -48,12 +55,14 @@ function getValue(){
         default : displayLarge.innerText = input.join("");
             break;
     }
+
     checkFont();
 }
 
 function getResult(){
+    let result = eval(equation.join(""));
     displaySmall.innerText = "";
-    displayLarge.innerText = eval(equation.join(""));
+    displayLarge.innerText = result;
     input = [];
     equation = [];
     equation.push(displayLarge.innerText);
